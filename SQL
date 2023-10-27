@@ -1,0 +1,25 @@
+# спринт11_запросы
+#задание_1
+SELECT
+    c."login" AS "Курьер",
+    COUNT(o."id") AS "Количество_Заказов_В_Доставке"
+FROM
+    "Couriers" c
+LEFT JOIN
+    "Orders" o ON c."id" = o."courierId"
+WHERE
+    o."inDelivery" = TRUE
+GROUP BY
+    c."login";
+
+#задание_2
+SELECT
+    "track" AS "Трекер",
+    CASE
+        WHEN "finished" = TRUE THEN 2
+        WHEN "cancelled" = TRUE THEN -1
+        WHEN "inDelivery" = TRUE THEN 1
+        ELSE 0
+    END AS "Статус"
+FROM
+    "Orders";
